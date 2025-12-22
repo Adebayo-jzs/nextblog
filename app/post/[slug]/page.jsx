@@ -1,4 +1,5 @@
 import { supabase } from "@/utils/supabase";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
     const {slug} = await params;
@@ -32,7 +33,7 @@ export async function generateStaticParams() {
     .from("posts")
     .select("slug");
 
-  if (error || !posts) return [];
+  if (error || !posts) return notFound();
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -48,9 +49,7 @@ export default async function BlogPostPage({ params }) {
     .eq("slug", slug)
     .single();
 
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+  if (!post) notFound();
 
   return (
     <article className="mx-auto max-w-3xl py-10">
