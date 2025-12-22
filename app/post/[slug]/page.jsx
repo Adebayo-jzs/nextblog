@@ -1,5 +1,31 @@
 import { supabase } from "@/utils/supabase";
 
+export async function generateMetadata({ params }) {
+    const {slug} = await params;
+
+    const {data:post} = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug",slug)
+    .single();
+
+    if (!post) {
+    return {
+      title: "Post not found",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      type: "article",
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const { data: posts, error } = await supabase
