@@ -1,0 +1,27 @@
+import { supabase } from "@/utils/supabase";
+import Link from "next/link";
+
+export default async function Home() {
+  const {data: posts} = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false })
+    // .limit(5);
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+         <div className="grid grid-col-2 gap-9">
+          {posts?.map((post) => (
+            <div key={post.id} className="flex flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-6 shadow-md hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+            <Link href={`/post/${post.slug}`}>
+              <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{post.title}</h2>
+              <p className="text-zinc-700 dark:text-zinc-300">{post.excerpt}</p>
+              <span className="text-sm text-zinc-500 dark:text-zinc-400">{new Date(post.created_at).toLocaleDateString()}</span>
+            </Link>
+            </div>
+          ))}
+         </div>
+      </main>
+    </div>
+  );
+}
