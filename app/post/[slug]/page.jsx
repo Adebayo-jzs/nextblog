@@ -1,5 +1,4 @@
 import { supabase } from "@/utils/supabase";
-
 export default async function BlogPost({ params }) {
     const {slug} = await params;
 
@@ -9,7 +8,7 @@ export default async function BlogPost({ params }) {
         .eq("slug", slug)
         .single();
     if(error || !post){
-        return <div>Post not found</div>;
+        return <div className="flex items-center justify-center min-h-screen ">Post not found</div>;
     }
 
     return (
