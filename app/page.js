@@ -16,7 +16,10 @@ export default async function Home() {
             <Link href={`/post/${post.slug}`}>
               <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{post.title}</h2>
               <p className="text-zinc-700 dark:text-zinc-300">{post.excerpt}</p>
+              <div className="flex gap-5">
               <span className="text-sm text-zinc-500 dark:text-zinc-400">{new Date(post.created_at).toLocaleDateString()}</span>
+              <span className="text-sm text-zinc-500 dark:text-zinc-400">{post.read_time}</span>
+              </div>
             </Link>
             </div>
           ))}
