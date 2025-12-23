@@ -8,6 +8,7 @@ export async function generateMetadata({ params }) {
     .from("posts")
     .select("*")
     .eq("slug",slug)
+    .eq("published", true)
     .single();
 
     if (!post) {

@@ -1,15 +1,23 @@
 "use client"
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation"; // Assuming Next.js router
+// import { useNavigate } from "react-router-dom"; // Use Next.js router for Next.js projects
 import { ArrowLeft, Plus, Edit, Trash2 } from "lucide-react";
 
 import { supabase } from "@/utils/supabase";
- 
-export default async function Admin() {
-//   const { user, isAdmin, loading } = useAuth();
-//   const navigate = useNavigate();
-//   const { toast } = useToast();
-  
+// import { useToast } from "@/components/ui/use-toast"; // Assuming a toast component is available
+// import { useAuth } from "@/hooks/useAuth"; // Assuming an authentication hook is available
+// import { postSchema } from "@/lib/validation"; // Assuming Zod schema for validation
+
+export default function Admin() { // Removed async here, data fetching moved to useEffect
+  // const { user, isAdmin, loading: authLoading } = useAuth(); // Uncomment and ensure useAuth is defined
+  const router = useRouter();
+  // const { toast } = useToast(); // Uncomment and ensure useToast is defined
+
+  const [posts, setPosts] = useState([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [errorFetchingPosts, setErrorFetchingPosts] = useState(null);
+
   const [isEditing, setIsEditing] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,167 +32,150 @@ export default async function Admin() {
     published: false,
   });
 
-   
-
-//   const fetchPosts = async () => {
-//     const { data, error } = await supabase
-//       .from("posts")
-//       .select("*")
-//       .order("created_at", { ascending: false });
-
-//     if (error) {
-//       toast({ variant: "destructive", title: "Error loading posts" });
-//     } else {
-//       setPosts(data || []);
-//     }
-//   };
-const {data: posts = []} = await supabase
-    .from("posts")
-    .select("*")
-    .order("created_at", { ascending: false });
-    
-    const generateSlug = (value) =>
+  const generateSlug = (value) =>
     value
       .toLowerCase()
       .trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)+/g, "");
 
-    async function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const { error } = await supabase.from("posts").insert([
-      {
-        title,
-        slug: slug || generateSlug(title),
-        excerpt,
-        category,
-        read_time,
-        content,
-      },
-    ]).select();
-
-    setLoading(false);
+  const fetchPosts = async () => {
+    setLoadingPosts(true);
+    setErrorFetchingPosts(null);
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
-      setError(error.message);
+      // toast({ variant: "destructive", title: "Error loading posts", description: error.message });
+      console.error("Error loading posts:", error.message);
+      setErrorFetchingPosts("Error loading posts.");
+    } else {
+      setPosts(data || []);
+    }
+    setLoadingPosts(false);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+    // if (!authLoading && !isAdmin) { // Uncomment if useAuth is implemented
+    //   router.push("/");
+    // }
+  }, [/* authLoading, isAdmin, router */]); // Add dependencies if useAuth is uncommented
+
+  const handleTitleChange = (title) => {
+    setFormData((prev) => ({
+      ...prev,
+      title,
+      slug: editingPost ? prev.slug : generateSlug(title),
+    }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      slug: "",
+      excerpt: "",
+      content: "",
+      category: "",
+      read_time: "",
+      published: false,
+    });
+    setEditingPost(null);
+    setIsEditing(false);
+  };
+
+  const handleEdit = (post) => {
+    setEditingPost(post);
+    setFormData({
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content,
+      category: post.category,
+      read_time: post.read_time,
+      published: post.published,
+    });
+    setIsEditing(true);
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to delete this post?")) return;
+
+    const { error } = await supabase.from("posts").delete().eq("id", id);
+
+    if (error) {
+      // toast({ variant: "destructive", title: "Error deleting post", description: error.message });
+      console.error("Error deleting post:", error.message);
+    } else {
+      // toast({ title: "Post deleted" });
+      fetchPosts();
+    }
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Uncomment and integrate Zod validation if postSchema is used
+    // const validation = postSchema.safeParse(formData);
+    // if (!validation.success) {
+    //   toast({
+    //     variant: "destructive",
+    //     title: "Validation Error",
+    //     description: validation.error.errors[0].message,
+    //   });
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
+    let error;
+
+    if (editingPost) {
+      const { error: updateError } = await supabase
+        .from("posts")
+        .update({ ...formData, slug: formData.slug || generateSlug(formData.title) }) // Ensure slug is generated if empty on update
+        .eq("id", editingPost.id);
+      error = updateError;
+    } else {
+      const { error: insertError } = await supabase.from("posts").insert({
+        ...formData,
+        slug: formData.slug || generateSlug(formData.title),
+        // author_id: user?.id, // Uncomment if useAuth is implemented
+      });
+      error = insertError;
+    }
+
+    setIsSubmitting(false);
+
+    if (error) {
+      // toast({ variant: "destructive", title: `Error ${editingPost ? "updating" : "creating"} post`, description: error.message });
+      console.error(`Error ${editingPost ? "updating" : "creating"} post:`, error.message);
       return;
     }
 
-    router.push("/blog");
+    // toast({ title: `Post ${editingPost ? "updated" : "created"}` });
+    resetForm();
+    fetchPosts();
   }
-//   const generateSlug = (title) => {
-//     return title
-//       .toLowerCase()
-//       .replace(/[^a-z0-9\s-]/g, "")
-//       .replace(/\s+/g, "-")
-//       .slice(0, 100);
-//   };
 
-//   const handleTitleChange = (title) => {
-//     setFormData((prev) => ({
-//       ...prev,
-//       title,
-//       slug: editingPost ? prev.slug : generateSlug(title),
-//     }));
-//   };
+  // if (authLoading || loadingPosts) { // Uncomment if useAuth is implemented
+  if (loadingPosts) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
 
-//   const resetForm = () => {
-//     setFormData({
-//       title: "",
-//       slug: "",
-//       excerpt: "",
-//       content: "",
-//       category: "",
-//       read_time: "",
-//       published: false,
-//     });
-//     setEditingPost(null);
-//     setIsEditing(false);
-//   };
-
-//   const handleEdit = (post) => {
-//     setEditingPost(post);
-//     setFormData({
-//       title: post.title,
-//       slug: post.slug,
-//       excerpt: post.excerpt,
-//       content: post.content,
-//       category: post.category,
-//       read_time: post.read_time,
-//       published: post.published,
-//     });
-//     setIsEditing(true);
-//   };
-
-//   const handleDelete = async (id) => {
-//     if (!confirm("Are you sure you want to delete this post?")) return;
-
-//     const { error } = await supabase.from("posts").delete().eq("id", id);
-
-//     if (error) {
-//       toast({ variant: "destructive", title: "Error deleting post" });
-//     } else {
-//       toast({ title: "Post deleted" });
-//       fetchPosts();
-//     }
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setIsSubmitting(true);
-
-//     const validation = postSchema.safeParse(formData);
-//     if (!validation.success) {
-//       toast({
-//         variant: "destructive",
-//         title: "Validation Error",
-//         description: validation.error.errors[0].message,
-//       });
-//       setIsSubmitting(false);
-//       return;
-//     }
-
-//     if (editingPost) {
-//       const { error } = await supabase
-//         .from("posts")
-//         .update(formData)
-//         .eq("id", editingPost.id);
-
-//       if (error) {
-//         toast({ variant: "destructive", title: "Error updating post", description: error.message });
-//       } else {
-//         toast({ title: "Post updated" });
-//         resetForm();
-//         fetchPosts();
-//       }
-//     } else {
-//       const { error } = await supabase.from("posts").insert({
-//         ...formData,
-//         author_id: user?.id,
-//       });
-
-//       if (error) {
-//         toast({ variant: "destructive", title: "Error creating post", description: error.message });
-//       } else {
-//         toast({ title: "Post created" });
-//         resetForm();
-//         fetchPosts();
-//       }
-//     }
-
-//     setIsSubmitting(false);
-//   };
-
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen flex items-center justify-center">
-//         <div className="text-muted-foreground">Loading...</div>
-//       </div>
-//     );
-//   }
+  // if (errorFetchingPosts) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="text-destructive">{errorFetchingPosts}</div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen">
@@ -396,6 +387,4 @@ const {data: posts = []} = await supabase
       {/* <Footer /> */}
     </div>
   );
-};
-
-// export default Admin;
+}
