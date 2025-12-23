@@ -33,7 +33,7 @@ export async function generateStaticParams() {
     .from("posts")
     .select("slug");
 
-  if (error || !posts) return notFound();
+  if (error || !posts) return [];
 
   return posts.map((post) => ({
     slug: post.slug,
