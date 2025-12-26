@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
+import "./Hero.css";
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
@@ -15,81 +16,60 @@ const Hero = () => {
         clearInterval(timer);
       }
     }, 50);
-    
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center pt-20 overflow-hidden">
+    <section className="hero-section bg-[#0d1519]">
       {/* Background glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-glow-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-glow-pulse" style={{ animationDelay: "1s" }} />
+      <div className="glow-blob blob-primary" />
+      <div className="glow-blob blob-accent" />
       
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Terminal-style intro */}
-          <div className="inline-block mb-8 opacity-0 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border text-sm font-mono">
-              <span className="text-syntax-green">●</span>
-              <span className="text-muted-foreground">npm run</span>
-              <span className="text-primary">thoughts</span>
-            </div>
+      <div className="hero-container">
+        <div className="hero-content">
+          
+          <div className="terminal-badge">
+            <span className="dot-green">●</span>
+            <span className="text-muted">npm run</span>
+            <span className="text-primary">thoughts</span>
           </div>
           
-          {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <span className="text-foreground">Hi, I'm </span>
-            <span className="text-gradient-primary">Theebayo</span>
-            <span className="text-primary terminal-cursor">_</span>
+          <h1 className="hero-title">
+            Hi, I'm <span className="text-primary">Theebayo</span>
+            <span className="cursor-main">_</span>
           </h1>
           
-          {/* Typing animation subtitle */}
-          <div className="h-10 mb-8 opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            <p className="text-xl md:text-2xl text-muted-foreground font-mono">
-              <span className="text-syntax-purple">const</span>{" "}
-              <span className="text-syntax-cyan">mission</span>{" "}
-              <span className="text-muted-foreground">=</span>{" "}
-              <span className="text-syntax-orange">"</span>
-              <span className="text-foreground">{displayText}</span>
-              <span className="text-primary terminal-cursor">|</span>
-              <span className="text-syntax-orange">"</span>
-              <span className="text-muted-foreground">;</span>
+          <div className="typing-subtitle">
+            <p className="font-mono">
+              <span className="syntax-purple">const</span>{" "}
+              <span className="syntax-cyan">mission</span>{" "}
+              <span className="text-muted">=</span>{" "}
+              <span className="syntax-orange">"</span>
+              <span className="text-white">{displayText}</span>
+              <span className="cursor-sub">|</span>
+              <span className="syntax-orange">"</span>
+              <span className="text-muted">;</span>
             </p>
           </div>
           
-          {/* Description */}
-          <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed opacity-0 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            Exploring React,Javascript, TypeScript, and modern web development. 
+          <p className="hero-description">
+            Exploring React, Javascript, TypeScript, and modern web development. 
             Sharing lessons learned from debugging at 2am.
           </p>
           
-          {/* CTA buttons */}
-          <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-up" style={{ animationDelay: "0.5s" }}>
-            <a 
-              href="#posts" 
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:glow-primary transition-all hover:scale-105"
-            >
-              Read Posts
-            </a>
-            <a 
-              href="#newsletter" 
-              className="px-6 py-3 bg-secondary text-foreground rounded-lg font-medium border border-border hover:border-primary/50 transition-all hover:scale-105"
-            >
-              Subscribe
-            </a>
+          <div className="hero-actions">
+            <a href="#posts" className="btn-primary">Read Posts</a>
+            <a href="#newsletter" className="btn-secondary">Subscribe</a>
           </div>
         </div>
       </div>
-      
-      {/* Decorative code snippets floating */}
-      <div className="absolute bottom-20 left-10 text-xs font-mono text-muted-foreground/30 hidden lg:block animate-float">
-        <pre>{`function blog() {
-  return <Posts />;
-}`}</pre>
+
+      {/* Floating Decorative Snippets */}
+      <div className="floating-code code-left">
+        <pre>{`function blog() {\n  return <Posts />;\n}`}</pre>
       </div>
-      <div className="absolute top-40 right-10 text-xs font-mono text-muted-foreground/30 hidden lg:block animate-float" style={{ animationDelay: "2s" }}>
-        <pre>{`// TODO: ship it 🚀
-export default App;`}</pre>
+      <div className="floating-code code-right">
+        <pre>{`// TODO: ship it 🚀\nexport default App;`}</pre>
       </div>
     </section>
   );
