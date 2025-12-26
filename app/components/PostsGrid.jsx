@@ -25,13 +25,13 @@ const PostsGrid = () => {
     fetchPosts();
   }, []);
 
-  // const formatDate = (string) => {
-  //   return new Date(dateString).toLocaleDateString("en-US", {
-  //     year: "numeric",
-  //     month: "long",
-  //     day: "numeric",
-  //   });
-  // };
+  const formatDate = (string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
     <section id="posts" className="py-20">
