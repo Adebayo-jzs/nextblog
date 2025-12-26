@@ -12,6 +12,15 @@ const Sponsor = () => {
         email: email,                    // Customer email
         amount: parseFloat(amount) * 100,                           // Amount in Kobo (e.g., 5000 NGN)
         publicKey: process.env.NEXT_PUBLIC_PAYSTACK_TEST_KEY,  // Get this from Paystack Dashboard
+        metadata: {
+      custom_fields: [
+        {
+          display_name: "Full Name",
+          variable_name: "full_name",
+          value: name,
+        },
+      ],
+    },
     };
 
     // Success handler
