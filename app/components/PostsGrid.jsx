@@ -65,6 +65,7 @@ const PostsGrid = () => {
                   date={formatDate(post.created_at)}
                   readTime={post.read_time}
                   tags={[post.category]}
+                  // tags={post.tags}
                   slug={post.slug}
                 />
               </div>
