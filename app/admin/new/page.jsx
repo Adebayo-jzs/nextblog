@@ -135,7 +135,4 @@ export default function NewPostPage() {
 }
 
 
-// NEXT_SUPABASE_PROJECT_ID="khsceiwbuqnmhtqpqeoj"
-// NEXT_PUBLIC_SUPABASE_ANON_KEY="sb_publishable_9wWhNgs4AeZIkbPPuPkVgw_hYYykd6v"
-// NEXT_PUBLIC_SUPABASE_URL="https://khsceiwbuqnmhtqpqeoj.supabase.co"
-// NEXT_PUBLIC_PAYSTACK_TEST_KEY="pk_test_2600e3fadd452b9e554d55dc97dea832086cc0d4"
+ 
