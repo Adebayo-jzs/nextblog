@@ -1,6 +1,6 @@
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
-
+// import Hero from "./Hero"; 
 export default async function Home() {
   const {data: posts} = await supabase
     .from("posts")
@@ -9,6 +9,8 @@ export default async function Home() {
     .order("created_at", { ascending: false })
     // .limit(5);
   return (
+    <>
+    {/* <Hero/> */}
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
          <div className="grid grid-col-2 gap-9">
@@ -27,5 +29,6 @@ export default async function Home() {
          </div>
       </main>
     </div>
+    </>
   );
 }
