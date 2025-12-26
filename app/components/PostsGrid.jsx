@@ -26,7 +26,7 @@ const PostsGrid = () => {
   }, []);
 
   const formatDate = (string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(string).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
