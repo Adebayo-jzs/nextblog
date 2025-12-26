@@ -4,7 +4,7 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 const tagColors = {
   react: "bg-syntax-cyan/15 text-syntax-cyan border-syntax-cyan/30",
   typescript: "bg-syntax-purple/15 text-syntax-purple border-syntax-purple/30",
-  javascript: "bg-syntax-orange/15 text-syntax-orange border-syntax-orange/30",
+  javascript: "bg-[#382b22] text-[#ff9933] border-[#ff9933]/30 px-1 rounded",
   css: "bg-syntax-pink/15 text-syntax-pink border-syntax-pink/30",
   performance: "bg-syntax-green/15 text-syntax-green border-syntax-green/30",
   tutorial: "bg-primary/15 text-primary border-primary/30",
@@ -22,11 +22,13 @@ const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
       
       <div className="relative z-10">
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
+        <div className="flex flex-wrap gap-2 mb-4 font-mono">
+          {/* {tags.split(',').map((tag, index) => ( */}
+           {tags.map((tag) => (
             <span 
               key={tag} 
-              className={`syntax-tag border ${tagColors[tag.toLowerCase()] || "bg-muted text-muted-foreground border-border"}`}
+              style={{fontSize:"12px"}}
+              className={`syntax-tag border ${tagColors[tag.toLowerCase()] || "p-0.5 rounded bg-[#272c35] text-[#7b899d] border-[#2d323c]"}`}
             >
               {tag}
             </span>
