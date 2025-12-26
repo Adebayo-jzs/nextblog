@@ -20,8 +20,8 @@ const Header = () => {
               <div className="absolute inset-0 blur-lg bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <span className="font-mono font-bold text-lg">
-              <span className="text-muted-foreground">~/</span>
-              <span className="text-foreground">devlog</span>
+              <span className="text-[#7b899d]">~/</span>
+              <span className="text-white">devlog</span>
               <span className="text-primary terminal-cursor">_</span>
             </span>
           </Link>
@@ -29,13 +29,13 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <a
               href="#posts"
-              className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+              className="text-[#7b899d] hover:text-white transition-colors text-sm font-medium"
             >
               Posts
             </a>
             <a
               href="#about"
-              className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+              className="text-[#7b899d] hover:text-white transition-colors text-sm font-medium"
             >
               About
             </a>
@@ -43,7 +43,7 @@ const Header = () => {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-[#7b899d] hover:text-white transition-colors"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -54,12 +54,9 @@ const Header = () => {
               </svg>
             </a>
             <div className="flex items-center gap-2">
-                 
-                    <Link href="/admin">
-                      <Settings className="h-4 w-4" />
-                    </Link> 
-                
-                 
+              <Link href="/admin">
+                <Settings className="h-4 w-4 text-white" />
+              </Link>      
             </div>
             {/* {user ? (
               <div className="flex items-center gap-2">
