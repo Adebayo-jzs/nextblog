@@ -1,6 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
-import Hero from "./Hero"; 
+import PostsGrid from "./components/PostsGrid";
+import Hero from "./components/Hero"; 
 export default async function Home() {
   const {data: posts} = await supabase
     .from("posts")
@@ -11,8 +12,9 @@ export default async function Home() {
   return (
     <>
     <Hero/>
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <PostsGrid/>
+    <div className="flex min-h-screen items-center justify-center  font-sans  bg-[#0e1216]">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
          <div className="grid grid-col-2 gap-9">
           {posts?.map((post) => (
             <div key={post.id} className="flex flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-6 shadow-md hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
