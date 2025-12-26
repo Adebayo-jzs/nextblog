@@ -13,7 +13,7 @@ const tagColors = {
 const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
   return (
     <article 
-      className={`group relative rounded-xl bg-card border border-border p-6 transition-all duration-300 hover:border-primary/40 card-glow ${
+      className={`group relative rounded-xl bg-[#15181e] border border-[#2d323c] p-6 transition-all duration-300 hover:border-[#00e6ff] card-glow ${
         featured ? "md:col-span-2" : ""
       }`}
     >
@@ -34,20 +34,20 @@ const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
         </div>
         
         {/* Title */}
-        <h3 className={`font-bold mb-3 group-hover:text-primary transition-colors ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
+        <h3 className={`font-bold text-white mb-3 group-hover:text-[#00e6ff] transition-colors ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
           <a href={`/post/${slug}`} className="block">
             {title}
           </a>
         </h3>
         
         {/* Excerpt */}
-        <p className={`text-muted-foreground mb-4 leading-relaxed ${featured ? "text-base" : "text-sm"}`}>
+        <p className={`text-[#7b899d] mb-4 leading-relaxed ${featured ? "text-base" : "text-sm"}`}>
           {excerpt}
         </p>
         
         {/* Meta */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-4 text-xs text-[#7b899d]">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
               {date}
