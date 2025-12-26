@@ -1,14 +1,14 @@
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 
  
-// const tagColors: Record<string, string> = {
-//   react: "bg-syntax-cyan/15 text-syntax-cyan border-syntax-cyan/30",
-//   typescript: "bg-syntax-purple/15 text-syntax-purple border-syntax-purple/30",
-//   javascript: "bg-syntax-orange/15 text-syntax-orange border-syntax-orange/30",
-//   css: "bg-syntax-pink/15 text-syntax-pink border-syntax-pink/30",
-//   performance: "bg-syntax-green/15 text-syntax-green border-syntax-green/30",
-//   tutorial: "bg-primary/15 text-primary border-primary/30",
-// };
+const tagColors = {
+  react: "bg-syntax-cyan/15 text-syntax-cyan border-syntax-cyan/30",
+  typescript: "bg-syntax-purple/15 text-syntax-purple border-syntax-purple/30",
+  javascript: "bg-syntax-orange/15 text-syntax-orange border-syntax-orange/30",
+  css: "bg-syntax-pink/15 text-syntax-pink border-syntax-pink/30",
+  performance: "bg-syntax-green/15 text-syntax-green border-syntax-green/30",
+  tutorial: "bg-primary/15 text-primary border-primary/30",
+};
 
 const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
   return (
