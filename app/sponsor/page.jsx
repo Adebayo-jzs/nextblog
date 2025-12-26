@@ -1,9 +1,6 @@
-import dynamic from "next/dynamic";
+"use client";
 
-const SponsorClient = dynamic(
-  () => import("./SponsorClient"),
-  { ssr: false }
-);
+import SponsorClient from "@/components/SponsorClient";
 
 export default function SponsorPage() {
   return <SponsorClient />;
