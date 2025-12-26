@@ -38,18 +38,18 @@ const PostsGrid = () => {
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-primary text-sm">01.</span>
-          <h2 className="text-2xl font-bold">Latest Posts</h2>
-          <div className="flex-1 h-px bg-border ml-4" />
+          <span className="font-mono text-[#00e6ff] text-sm">01.</span>
+          <h2 className="text-2xl text-white font-bold">Latest Posts</h2>
+          <div className="flex-1 h-px bg-[#2d323c] ml-4" />
         </div>
 
         {/* Posts grid */}
         {loading ? (
-          <div className="text-center py-12 text-muted-foreground">
+          <div className="text-center py-12 text[#2d323c]">
             Loading posts...
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-12 text-muted-foreground">
+          <div className="text-center py-12 text[#2d323c]">
             No posts yet. Check back soon!
           </div>
         ) : (
@@ -57,8 +57,7 @@ const PostsGrid = () => {
             {posts.map((post, index) => (
               <div
                 key={post.id}
-                className="opacity-0 animate-fade-up"
-                style={{ animationDelay: `${0.1 * index}s` }}
+                className="opacity-100 "
               >
                 <PostCard
                   title={post.title}
@@ -77,10 +76,10 @@ const PostsGrid = () => {
         <div className="text-center mt-12">
           <a
             href="/archive"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-mono text-sm"
+            className="inline-flex items-center gap-2 text[#2d323c] hover:text-[#00e6ff] transition-colors font-mono text-sm"
           >
             <span>view all posts</span>
-            <span className="text-primary">→</span>
+            <span className="text-[#00e6ff]">→</span>
           </a>
         </div>
       </div>
