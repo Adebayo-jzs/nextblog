@@ -34,7 +34,7 @@ const PostsGrid = () => {
   };
 
   return (
-    <section id="posts" className="py-20">
+    <section id="posts" className="py-20 px-30">
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-3 mb-12">
@@ -45,11 +45,11 @@ const PostsGrid = () => {
 
         {/* Posts grid */}
         {loading ? (
-          <div className="text-center py-12 text[#2d323c]">
+          <div className="text-center py-12 text-[#7b899d]">
             Loading posts...
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-12 text[#2d323c]">
+          <div className="text-center py-12 text-[#7b899d]">
             No posts yet. Check back soon!
           </div>
         ) : (
@@ -77,7 +77,7 @@ const PostsGrid = () => {
         <div className="text-center mt-12">
           <a
             href="/archive"
-            className="inline-flex items-center gap-2 text[#2d323c] hover:text-[#00e6ff] transition-colors font-mono text-sm"
+            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-[#00e6ff] transition-colors font-mono text-sm"
           >
             <span>view all posts</span>
             <span className="text-[#00e6ff]">→</span>
