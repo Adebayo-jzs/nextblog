@@ -6,7 +6,7 @@ export default async function sitemap() {
     .select("slug");
 
   const postUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${baseUrl}/post/${post.slug}`,
     lastModified: new Date(),
   }));
 
