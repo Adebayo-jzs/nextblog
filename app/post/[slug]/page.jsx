@@ -1,6 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import { notFound } from "next/navigation";
-
+import Link from "next/link";
+import { ArrowLeft,Calendar,Clock } from "lucide-react";
 export async function generateMetadata({ params }) {
     const {slug} = await params;
 
@@ -28,7 +29,14 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-
+  const formatDate = (string) => {
+    return new Date(string).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+  
 export async function generateStaticParams() {
   const { data: posts, error } = await supabase
     .from("posts")
@@ -53,10 +61,67 @@ export default async function BlogPostPage({ params }) {
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl py-10">
-      <h1 className="text-3xl font-bold">{post.title}</h1>
-      <span className="text-sm text-zinc-500 dark:text-zinc-400">{post.created_at}</span>
-      <div className="mt-6">{post.content}</div>
-    </article>
+    // <article className="mx-auto max-w-3xl py-10">
+    //   <h1 className="text-3xl font-bold">{post.title}</h1>
+    //   <span className="text-sm text-zinc-500 dark:text-zinc-400">{post.created_at}</span>
+    //   <div className="mt-6">{post.content}</div>
+    // </article>
+    <div className="min-h-screen">
+      <div className="noise-overlay" />
+      {/* <Header /> */}
+
+      <main className="pt-32 pb-20">
+        <article className="container mx-auto px-6 max-w-3xl">
+          {/* Back link */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-primary transition-colors mb-8 font-mono text-sm"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to posts
+          </Link>
+
+          {/* Tags */}
+          {/* <div className="flex flex-wrap gap-2 mb-6">
+            {categories.map((tag) => (
+              <span
+                key={tag}
+                className={`syntax-tag border ${
+                  tagColors[tag.toLowerCase()] ||
+                  "bg-muted text-muted-foreground border-border"
+                }`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div> */}
+
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+            {post.title}
+          </h1>
+
+          {/* Meta */}
+          <div className="flex items-center gap-6 text-sm text-[#7b899d] mb-12 pb-8 border-b border-border">
+            <span className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              {formatDate(post.created_at)}
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              {post.read_time}
+            </span>
+          </div>
+
+          {/* Content */}
+          <div className="prose prose-invert text-[#7b899d] max-w-none">
+            {post.content}
+            {/* {renderContent(post.content)} */}
+          </div>
+        </article>
+      </main>
+
+      {/* <Footer /> */}
+    </div>
   );
 }
