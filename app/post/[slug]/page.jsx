@@ -1,5 +1,6 @@
 import { supabase } from "@/utils/supabase";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft,Calendar,Clock } from "lucide-react";
 export async function generateMetadata({ params }) {
@@ -104,7 +105,8 @@ export default async function BlogPostPage({ params }) {
           </h1>
 
           {/* Meta */}
-          <div className="flex items-center gap-6 text-sm text-[#7b899d] mb-12 pb-8 border-b border-border">
+          <div className="flex flex-col gap-4  text-[#7b899d] mb-12 pb-8 border-b border-[#2d323c]">
+            <div className="flex items-center gap-6 text-sm">
             <span className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               {formatDate(post.created_at)}
@@ -114,7 +116,17 @@ export default async function BlogPostPage({ params }) {
               {post.read_time}
             </span>
           </div>
-
+          <div className="flex items-center gap-2"> 
+          <Image
+            src="/avatar.jpg"
+            alt="Author Avatar"
+            width={30}
+            height={30}
+            className="rounded-full"
+          />
+          <h2 className=" font-mono">Adebayo Adedeji</h2>
+          </div>
+          </div>
           {/* Content */}
           <div className="prose prose-invert text-[#7b899d] max-w-none">
             {post.content}
