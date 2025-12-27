@@ -10,19 +10,19 @@ const Header = () => {
 //   const { user, isAdmin, signOut } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b  backdrop-blur-xl px-30">
       <div className="container mx-auto px-6 py-4">
         <nav className="flex items-center justify-between">
             
           <Link href="/" className="flex items-center gap-2 group">
             <div className="relative">
-              <Terminal className="h-6 w-6 text-primary transition-all group-hover:glow-text" />
+              <Terminal className="h-6 w-6 text-[#00ffe6] transition-all group-hover:glow-text" />
               <div className="absolute inset-0 blur-lg bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <span className="font-mono font-bold text-lg">
               <span className="text-[#7b899d]">~/</span>
               <span className="text-white">devlog</span>
-              <span className="text-primary terminal-cursor">_</span>
+              <span className="text-[#00e6ff] cursor-main">_</span>
             </span>
           </Link>
 
