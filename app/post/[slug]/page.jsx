@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft,Calendar,Clock } from "lucide-react";
+import MarkdownIt from "markdown-it";
+const md = new MarkdownIt();
 export async function generateMetadata({ params }) {
     const {slug} = await params;
 
@@ -13,11 +15,8 @@ export async function generateMetadata({ params }) {
     .eq("published", true)
     .single();
 
-    if (!post) {
-    return {
-      title: "Post not found",
-    };
-  }
+    if (!post) !notFound();
+  
 const authorSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -76,6 +75,7 @@ export default async function BlogPostPage({ params }) {
     .single();
 
   if (!post) notFound();
+  const htmlContent = md.render(post.content)
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -104,7 +104,7 @@ const jsonLd = {
           {/* Back link */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-primary transition-colors mb-8 font-mono text-sm"
+            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-[#00E5FF] transition-colors mb-8 font-mono text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to posts
@@ -130,7 +130,7 @@ const jsonLd = {
             {post.title}
           </h1>
 
-          {/* Meta */}
+          {/* {/* Meta *  /} */}
           <div className="flex flex-col gap-4  text-[#7b899d] mb-12 pb-8 border-b border-[#2d323c]">
             <div className="flex items-center gap-6 text-sm">
             <span className="flex items-center gap-2">
@@ -154,10 +154,16 @@ const jsonLd = {
           </div>
           </div>
           {/* Content */}
-          <div className="prose prose-invert text-[#7b899d] max-w-none">
-            {post.content}
+          {/* <div className="prose prose-invert text-[#7b899d] max-w-none"> */}
+            {/* {post.content} */}
             {/* {renderContent(post.content)} */}
-          </div>
+          {/* </div> */
+          <div 
+      className="prose prose-invert max-w-none  text-[#7b899d]
+                 prose-img:rounded-xl prose-img:border prose-img:border-[#2d323c]
+                 prose-headings:text-white prose-a:text-[#00e6ff]"
+      dangerouslySetInnerHTML={{ __html: htmlContent }} 
+    />}
         </article>
       </main>
 
