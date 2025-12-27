@@ -18,7 +18,21 @@ export async function generateMetadata({ params }) {
       title: "Post not found",
     };
   }
-
+const authorSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': post.title,
+  'author': {
+    '@type': 'Person',
+    'name': 'Adebayo Adedeji',
+    'url': 'https://theebayo.name.ng', // Very important!
+    'sameAs': [
+      'https://twitter.com/theebayo',
+      'https://github.com/Adebayo-jzs',
+      'https://linkedin.com/in/theebayo'
+    ]
+  }
+};
   return {
     title: post.title,
     description: post.excerpt,
@@ -62,13 +76,26 @@ export default async function BlogPostPage({ params }) {
     .single();
 
   if (!post) notFound();
-
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://yourdomain.com' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://yourdomain.com/blog' },
+      { '@type': 'ListItem', 'position': 3, 'name': params.slug, 'item': `https://yourdomain.com/blog/${params.slug}` }
+    ],
+  };
   return (
     // <article className="mx-auto max-w-3xl py-10">
     //   <h1 className="text-3xl font-bold">{post.title}</h1>
     //   <span className="text-sm text-zinc-500 dark:text-zinc-400">{post.created_at}</span>
     //   <div className="mt-6">{post.content}</div>
     // </article>
+    <>
+    <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="min-h-screen">
       <div className="noise-overlay" />
       {/* <Header /> */}
@@ -137,5 +164,6 @@ export default async function BlogPostPage({ params }) {
 
       {/* <Footer /> */}
     </div>
+    </>
   );
 }
