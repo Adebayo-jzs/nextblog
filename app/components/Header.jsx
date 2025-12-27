@@ -10,7 +10,7 @@ const Header = () => {
 //   const { user, isAdmin, signOut } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b  backdrop-blur-xl px-30">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b  backdrop-blur-xl lg:px-30">
       <div className="container mx-auto px-6 py-4">
         <nav className="flex items-center justify-between">
             
