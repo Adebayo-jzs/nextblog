@@ -23,10 +23,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
-        <main >
-        {children}
-        </main>
+      <div className="min-h-screen">
+        {/* <div className="noise-overlay" /> */}
+          <Header/>
+          <main className="mt-16" >
+            {children}
+          </main>
+        {/* </div> */}
+      </div>
       </body>
     </html>
   );
