@@ -26,6 +26,8 @@ export async function generateMetadata({ params }) {
       description: post.excerpt,
       url: `/blog/${post.slug}`,
       type: "article",
+      publishedTime: post.date,
+      authors: ['Adebayo Adedeji','Adedeji Adebayo', 'Theebayo'],
     },
   };
 }
