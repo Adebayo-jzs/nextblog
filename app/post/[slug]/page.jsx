@@ -81,8 +81,7 @@ const jsonLd = {
     '@type': 'BreadcrumbList',
     'itemListElement': [
       { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://yourdomain.com' },
-      { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://yourdomain.com/blog' },
-      { '@type': 'ListItem', 'position': 3, 'name': params.slug, 'item': `https://yourdomain.com/blog/${params.slug}` }
+      { '@type': 'ListItem', 'position': 3, 'name': slug, 'item': `https://yourdomain.com/blog/${slug}` }
     ],
   };
   return (
