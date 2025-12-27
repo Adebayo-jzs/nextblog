@@ -34,7 +34,7 @@ const PostsGrid = () => {
   };
 
   return (
-    <section id="posts" className="py-20 px-30">
+    <section id="posts" className="py-20 lg:px-30">
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-3 mb-12">
