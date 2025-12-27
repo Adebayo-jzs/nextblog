@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Assuming Next.js router
 // import { useNavigate } from "react-router-dom"; // Use Next.js router for Next.js projects
 import { ArrowLeft, Plus, Edit, Trash2 } from "lucide-react";
+import Header from "../components/Header";
 
 import { supabase } from "@/utils/supabase";
 // import { useToast } from "@/components/ui/use-toast"; // Assuming a toast component is available
@@ -164,7 +165,7 @@ export default function Admin() { // Removed async here, data fetching moved to 
   if (loadingPosts) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-[#7b899d]">Loading...</div>
       </div>
     );
   }
@@ -178,22 +179,25 @@ export default function Admin() { // Removed async here, data fetching moved to 
   // }
 
   return (
+    <>
+    <Header/>
+
     <div className="min-h-screen">
       <div className="noise-overlay" />
-      {/* <Header /> */}
+      <Header />
 
       <main className="pt-32 pb-20">
-        <div className="container mx-auto px-6 max-w-4xl">
+        <div className="container mx-auto px-6 max-w-4xl font-mono">
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 font-mono text-sm"
+            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-[#00e6ff] transition-colors mb-8 font-mono text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to home
           </a>
 
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
@@ -206,7 +210,7 @@ export default function Admin() { // Removed async here, data fetching moved to 
           </div>
 
           {isEditing ? (
-            <div className="bg-card border border-border rounded-xl p-6">
+            <div className="bg-card border border-border rounded-xl p-6 text-white ">
               <h2 className="text-xl font-bold mb-6">
                 {editingPost ? "Edit Post" : "Create New Post"}
               </h2>
@@ -332,7 +336,7 @@ export default function Admin() { // Removed async here, data fetching moved to 
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
+                    className="px-4 py-2 border border-gray-300 rounded hover:bg-[#3eff3e]"
                   >
                     Cancel
                   </button>
@@ -342,36 +346,36 @@ export default function Admin() { // Removed async here, data fetching moved to 
           ) : (
             <div className="space-y-4">
               {posts.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-12 text-[#7b899d]">
                   No posts yet. Create your first post!
                 </div>
               ) : (
                 posts.map((post) => (
                   <div
                     key={post.id}
-                    className="bg-card border border-border rounded-lg p-4 flex items-center justify-between"
+                    className="bg-[#171a20] border border-[#2d323c] rounded-lg p-4 flex items-center justify-between"
                   >
                     <div>
-                      <h3 className="font-semibold">{post.title}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-white">{post.title}</h3>
+                      <p className="text-sm text-[#7b899d]">
                         {post.category} • {post.read_time} •{" "}
                         {post.published ? (
                           <span className="text-accent">Published</span>
                         ) : (
-                          <span className="text-syntax-orange">Draft</span>
+                          <span className="text-[#ff9933]">Draft</span>
                         )}
                       </p>
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleEdit(post)}
-                        className="p-2 hover:bg-gray-100 rounded"
+                        className="p-2 hover:bg-[#3eff3e] hover:text-black rounded text-white"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(post.id)}
-                        className="p-2 hover:bg-gray-100 rounded text-red-600"
+                        className="p-2 hover:bg-[#3eff3e]  rounded text-red-600"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -386,5 +390,6 @@ export default function Admin() { // Removed async here, data fetching moved to 
 
       {/* <Footer /> */}
     </div>
+    </>
   );
 }
