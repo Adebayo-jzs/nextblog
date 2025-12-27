@@ -53,9 +53,9 @@ const Header = () => {
                 />
               </svg>
             </a>
-            <div className="flex items-center gap-2">
-              <Link href="/admin">
-                <Settings className="h-4 w-4 text-white" />
+            <div className="flex items-center gap-2 ">
+              <Link href="/admin" className=" p-2 rounded hover:bg-[#3eff3e]">
+                <Settings className="h-4 w-4  text-white" />
               </Link>      
             </div>
             {/* {user ? (
