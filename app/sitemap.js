@@ -1,6 +1,9 @@
+import { supabase } from "@/utils/supabase";
 export default async function sitemap() {
   const baseUrl = 'https://blog.theebayo.name.ng';
-  const posts = await getAllPosts();
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("slug");
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
