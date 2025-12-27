@@ -1,0 +1,7 @@
+ 
+
+User-agent: *
+Allow: /
+Allow: /post/slug
+Allow: /admin
+Sitemap: https://blog.theebayo.name.ng/sitemap.xml
