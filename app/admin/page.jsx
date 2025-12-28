@@ -3,15 +3,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Assuming Next.js router
 // import { useNavigate } from "react-router-dom"; // Use Next.js router for Next.js projects
 import { ArrowLeft, Plus, Edit, Trash2 } from "lucide-react";
-import Header from "../components/Header";
-
-import { supabase } from "@/utils/supabase";
+import Header from "@/components/Header";
+ 
+import { createClient } from "@/lib/client";
 // import { useToast } from "@/components/ui/use-toast"; // Assuming a toast component is available
 // import { useAuth } from "@/hooks/useAuth"; // Assuming an authentication hook is available
 // import { postSchema } from "@/lib/validation"; // Assuming Zod schema for validation
 
 export default function Admin() { // Removed async here, data fetching moved to useEffect
   // const { user, isAdmin, loading: authLoading } = useAuth(); // Uncomment and ensure useAuth is defined
+  const supabase = createClient()
   const router = useRouter();
   // const { toast } = useToast(); // Uncomment and ensure useToast is defined
 
