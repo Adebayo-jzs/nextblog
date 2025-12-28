@@ -1,13 +1,13 @@
-import { supabase } from "@/utils/supabase";
+import { createClient } from "@/lib/client";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft,Calendar,Clock } from "lucide-react";
 import MarkdownIt from "markdown-it";
 const md = new MarkdownIt();
+const supabase = createClient();
 export async function generateMetadata({ params }) {
     const {slug} = await params;
-
     const {data:post} = await supabase
     .from("posts")
     .select("*")
