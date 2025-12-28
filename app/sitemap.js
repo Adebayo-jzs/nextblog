@@ -1,5 +1,7 @@
-import { supabase } from "@/utils/supabase";
+ 
+import { createClient } from "@/lib/client";
 export default async function sitemap() {
+  const supabase = createClient()
   const baseUrl = 'https://blog.theebayo.name.ng';
   const { data: posts } = await supabase
     .from("posts")
