@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "@/utils/supabase";
+import { createClient } from "@/lib/client";
 import { useRouter } from "next/navigation";
 
 export default function NewPostPage() {
+  const supabase = createClient()
   const router = useRouter();
 
   const [title, setTitle] = useState("");
