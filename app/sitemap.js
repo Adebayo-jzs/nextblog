@@ -9,7 +9,7 @@ export default async function sitemap() {
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/posts/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(),
     priority:0.8,
   }));
 
