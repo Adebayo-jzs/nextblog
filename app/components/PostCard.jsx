@@ -2,12 +2,13 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 
  
 const tagColors = {
-  react: "bg-syntax-cyan/15 text-syntax-cyan border-syntax-cyan/30",
-  typescript: "bg-syntax-purple/15 text-syntax-purple border-syntax-purple/30",
+  react: "bg-[#00e5ff]/15 text-[#00e5ff] border-[#00e5ff]/30 px-1 rounded",
+  css: "bg-[#00e5ff]/15 text-[#00e5ff] border-[#00e5ff]/30 px-1 rounded",
+  typescript: "bg-[#b366ff]/15 text-[#b366ff] border-[#b366ff]/30 px-1 rounded",
+  code: "bg-[#382b22] text-[#ff9933] border-[#ff9933]/30 px-1 rounded",
   javascript: "bg-[#382b22] text-[#ff9933] border-[#ff9933]/30 px-1 rounded",
-  css: "bg-syntax-pink/15 text-syntax-pink border-syntax-pink/30",
-  performance: "bg-[#1b3a23] text-[#3dff3d] border-[#3dff3d]",
-  tutorial: "bg-primary/15 text-primary border-primary/30",
+  design: "bg-[#ff66b3]/15 text-[#ff66b3] border-[#ff66b3]/30  px-1 rounded",
+  performance: "bg-[#1b3a23] text-[#3dff3d] border-[#3dff3d]/30 px-1 rounded", 
 };
 
 const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
