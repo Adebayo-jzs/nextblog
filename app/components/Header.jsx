@@ -58,18 +58,18 @@ const Header = async () => {
           </Link>
 
           <div className="flex items-center gap-6">
-            <a
-              href="#posts"
+            <Link
+              href="/posts"
               className="text-[#7b899d] hover:text-white transition-colors text-sm font-medium"
             >
               Posts
-            </a>
-            <a
-              href="#about"
+            </Link>
+            <Link
+              href="/sponsor"
               className="text-[#7b899d] hover:text-white transition-colors text-sm font-medium"
             >
-              About
-            </a>
+              Sponsor
+            </Link>
             <a
               href="https://github.com"
               target="_blank"
@@ -110,7 +110,7 @@ const Header = async () => {
                 <LogoutButton/>
               </div>
             ) : (
-              <Button variant="ghost" size="sm" asChild>
+              <Button size="sm" asChild>
                 <Link href="/auth/login">
                   <LogIn className="h-4 w-4" color="white"/>
                 </Link>

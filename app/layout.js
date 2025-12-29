@@ -13,17 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  metadataBase: new URL('https://blog.theebayo.name.ng'),
-  title: {
-    default: 'Theebayo Blog',
-    template: '%s | Adebayo Blog', // Adds suffix to sub-pages
-  },
-  description: 'Sharing insights on Next.js and Web Development',
-  twitter: {
-    card: 'summary_large_image',
-  },
-};
+
 
 export default function RootLayout({ children }) {
   return (

@@ -1,7 +1,21 @@
  
 // import Link from "next/link";
+import { LogoutButton } from "./components/logout-button";
 import PostsGrid from "./components/PostsGrid";
 import Hero from "./components/Hero"; 
+
+export const metadata = {
+  metadataBase: new URL('https://blog.theebayo.name.ng'),
+  title: {
+    default: 'Theebayo Blog',
+    template: '%s | Adebayo Blog', // Adds suffix to sub-pages
+  },
+  description: 'Sharing insights on Next.js and Web Development',
+  twitter: {
+    card: 'summary_large_image',
+  },
+};
+
 export default async function Home() {
   // const {data: posts} = await supabase
   //   .from("posts")
@@ -11,6 +25,7 @@ export default async function Home() {
     // .limit(5);
   return (
     <>
+    {/* <LogoutButton/>  */}
     <Hero/>
     <PostsGrid/>
     {/* <div className="flex min-h-screen items-center justify-center  font-sans  bg-[#0e1216]">

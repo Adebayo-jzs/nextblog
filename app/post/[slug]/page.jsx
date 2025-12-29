@@ -38,7 +38,7 @@ const authorSchema = {
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/blog/${post.slug}`,
+      url: `https://blog.theebayo.name.ng/post/${post.slug}`,
       type: "article",
       publishedTime: post.date,
       authors: ['Adebayo Adedeji','Adedeji Adebayo', 'Theebayo'],
