@@ -1,41 +1,38 @@
 "use client"
+import PostCard from "../components/PostCard";
 import { useEffect, useState } from "react";
-import PostCard from "./PostCard"; 
 import { createClient } from "@/lib/client";
 
- 
-
-const PostsGrid = () => {
-  const supabase = createClient()
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(2);
-
-      setPosts(data || []);
-      setLoading(false);
-    };
-
-    fetchPosts();
-  }, []);
-
-  const formatDate = (string) => {
-    return new Date(string).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  return (
-    <section id="posts" className="py-20 lg:px-30">
+export default function AllPosts() {
+    const supabase = createClient()
+      const [posts, setPosts] = useState([]);
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        const fetchPosts = async () => {
+          const { data } = await supabase
+            .from("posts")
+            .select("*")
+            .eq("published", true)
+            .order("created_at", { ascending: false })
+            // .limit(6);
+    
+          setPosts(data || []);
+          setLoading(false);
+        };
+    
+        fetchPosts();
+      }, []);
+    
+      const formatDate = (string) => {
+        return new Date(string).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      };
+    return(
+        <section id="allposts" className="py-20 lg:px-30">
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-3 mb-12">
@@ -74,19 +71,8 @@ const PostsGrid = () => {
           </div>
         )}
 
-        {/* View all link */}
-        <div className="text-center mt-12">
-          <a
-            href="/posts"
-            className="inline-flex items-center gap-2 text-[#7b899d] hover:text-[#00e6ff] transition-colors font-mono text-sm"
-          >
-            <span>view all posts</span>
-            <span className="text-[#00e6ff]">→</span>
-          </a>
-        </div>
+         
       </div>
     </section>
-  );
-};
-
-export default PostsGrid;
+    );
+}

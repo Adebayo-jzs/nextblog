@@ -6,7 +6,7 @@ const tagColors = {
   typescript: "bg-syntax-purple/15 text-syntax-purple border-syntax-purple/30",
   javascript: "bg-[#382b22] text-[#ff9933] border-[#ff9933]/30 px-1 rounded",
   css: "bg-syntax-pink/15 text-syntax-pink border-syntax-pink/30",
-  performance: "bg-syntax-green/15 text-syntax-green border-syntax-green/30",
+  performance: "bg-[#1b3a23] text-[#3dff3d] border-[#3dff3d]",
   tutorial: "bg-primary/15 text-primary border-primary/30",
 };
 
@@ -37,7 +37,7 @@ const PostCard = ({ title, excerpt, date, readTime, tags, slug, featured }) => {
         
         {/* Title */}
         <h3 className={`font-bold text-white mb-3 group-hover:text-[#00e6ff] transition-colors ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
-          <a href={`/post/${slug}`} className="block">
+          <a href={`/posts/${slug}`} className="block">
             {title}
           </a>
         </h3>

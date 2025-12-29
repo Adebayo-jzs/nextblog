@@ -105,7 +105,7 @@ header {
   width: 100%;
   z-index: 100;
   /* Use the variable with an alpha channel for transparency */
-  background-color: hsla(var(--background), 0.75); 
+  background-color: #0e1015dc; 
   backdrop-filter: blur(12px);
   border-bottom: 1px solid hsla(var(--border), 0.5);
 }
