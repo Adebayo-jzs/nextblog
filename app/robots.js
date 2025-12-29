@@ -3,7 +3,8 @@ export default function robots() {
     rules: {
       userAgent: '*',
       allow: '/',
-      allow: '/post/slug',
+      allow: '/posts',
+      allow: '/posts/slug',
       disallow: '/admin/',
     },
     sitemap: 'https://blog.theebayo.name.ng/sitemap.xml',
