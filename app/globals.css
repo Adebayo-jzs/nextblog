@@ -56,12 +56,12 @@ body {
   /* primary:var(--foreground); */
 }
 header {
-  position: fixed; /* or sticky */
+  position: fixed;/*  or sticky */
   top: 0;
   width: 100%;
   z-index: 100; /* Higher than the hero's z-index */
-  background-color:#0e1015; /* 80% opacity */
-  /* backdrop-filter: blur(120px); Creates a sleek glass effect */
+  background-color:#0e1015; 
+  backdrop-filter: blur(120px); /*Creates a sleek glass effect*/
   border-bottom: 1px solid hsl(var(--border));
 }
 
