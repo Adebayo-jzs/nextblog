@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Assuming Next.js router
 // import { useNavigate } from "react-router-dom"; // Use Next.js router for Next.js projects
 import { ArrowLeft, Plus, Edit, Trash2 } from "lucide-react";
-import Header from "@/components/Header";
+// import Header from "@/app/components/Header";
  
 import { createClient } from "@/lib/client";
 // import { useToast } from "@/components/ui/use-toast"; // Assuming a toast component is available
@@ -181,11 +181,11 @@ export default function Admin() { // Removed async here, data fetching moved to 
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
 
     <div className="min-h-screen">
       <div className="noise-overlay" />
-      <Header />
+      {/* <Header /> */}
 
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-6 max-w-4xl font-mono">
