@@ -1,12 +1,13 @@
 export default function robots() {
+  const baseUrl = 'https://theebayo.name.ng';
+
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      allow: '/posts',
-      allow: '/posts/slug',
-      disallow: '/admin/',
+      allow:'/posts/',
+      disallow: '/admin/', 
     },
-    sitemap: 'https://blog.theebayo.name.ng/sitemap.xml',
-  }
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }
