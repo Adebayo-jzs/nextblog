@@ -36,8 +36,8 @@ export default function AllPosts() {
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-[#00e6ff] text-sm">01.</span>
-          <h2 className="text-2xl text-white font-bold">Latest Posts</h2>
+          <span className="font-mono text-[#00e6ff] text-sm">##</span>
+          <h2 className="text-2xl text-white font-bold">All Posts</h2>
           <div className="flex-1 h-px bg-[#2d323c] ml-4" />
         </div>
 
