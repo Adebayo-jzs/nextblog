@@ -34,13 +34,13 @@ const Hero = () => {
             <span className="text-primary">thoughts</span>
           </div>
           
-          <h1 className="hero-title">
+          <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl">
             Hi, I'm <span className="text-primary">Theebayo</span>
             <span className="cursor-main">_</span>
           </h1>
           
           <div className="typing-subtitle">
-            <p className="font-mono">
+            <p className="font-mono  text-xl md:text-2xl">
               <span className="syntax-purple">const</span>{" "}
               <span className="syntax-cyan">mission</span>{" "}
               <span className="text-muted">=</span>{" "}
@@ -52,14 +52,14 @@ const Hero = () => {
             </p>
           </div>
           
-          <p className="hero-description">
+          <p className="hero-description text-base md:text-lg ">
             Exploring React, Javascript, TypeScript, and modern web development. 
             Sharing lessons learned from debugging at 2am.
           </p>
           
           <div className="hero-actions">
-            <a href="#posts" className="btn-primary">Read Posts</a>
-            <a href="#newsletter" className="btn-secondary">Subscribe</a>
+            <a href="/posts" className="btn-primary">Read Posts</a>
+            <a href="#newsletter" className="disabled btn-secondary">Subscribe</a>
           </div>
         </div>
       </div>
