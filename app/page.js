@@ -1,7 +1,7 @@
  
 // import Link from "next/link";
-import PostsGrid from "../components/PostsGrid";
-import Hero from "../components/Hero"; 
+import PostsGrid from "./components/PostsGrid";
+import Hero from "./components/Hero"; 
 export default async function Home() {
   // const {data: posts} = await supabase
   //   .from("posts")
