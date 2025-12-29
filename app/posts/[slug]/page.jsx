@@ -80,8 +80,8 @@ const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     'itemListElement': [
-      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://yourdomain.com' },
-      { '@type': 'ListItem', 'position': 3, 'name': slug, 'item': `https://yourdomain.com/blog/${slug}` }
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://blog.theebayo.name.ng' },
+      { '@type': 'ListItem', 'position': 3, 'name': slug, 'item': `https://blog.theebayo.name.ng/posts/${slug}` }
     ],
   };
   return (
