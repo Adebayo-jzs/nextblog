@@ -63,6 +63,11 @@
   --input: 240 5.9% 90%;
   --ring: 240 5.9% 10%;
   --radius: 0.5rem;
+  --syntax-cyan: 186 100% 50%;
+    --syntax-green: 120 100% 62%;
+    --syntax-purple: #b366ff;
+    --syntax-orange: 30 100% 60%;
+    --syntax-pink: #ff66b3;
 }
 
 .dark {
