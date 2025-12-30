@@ -31,11 +31,11 @@ const Hero = () => {
           <div className="terminal-badge">
             <span className="dot-green">●</span>
             <span className="text-muted">npm run</span>
-            <span className="text-primary">thoughts</span>
+            <span className="text-lightblue">thoughts</span>
           </div>
           
           <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl">
-            Hi, I'm <span className="text-primary">Theebayo</span>
+            Hi, I'm <span className="text-lightblue">Theebayo</span>
             <span className="cursor-main">_</span>
           </h1>
           
