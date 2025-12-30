@@ -36,19 +36,16 @@ const Header = async () => {
     isAdmin = roleData?.role === 'admin' || jwtRole === 'admin';
   }
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.refresh() // This forces the Server Header to re-render
-  }
+   
   return (
     <header>
       <div className="container mx-auto px-6 py-4">
         <nav className="flex items-center justify-between">
             
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 ">
             <div className="relative">
-              <Terminal className="h-6 w-6 text-[#00ffe6] transition-all group-hover:glow-text" />
-              <div className="absolute inset-0 blur-lg bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Terminal className="h-6 w-6 text-[#00ffe6] " />
+              {/* <div className="absolute inset-0 blur-lg bg-primary/30      " /> */}
             </div>
             <span className="font-mono font-bold text-lg">
               <span className="text-[#7b899d]">~/</span>
@@ -98,11 +95,11 @@ const Header = async () => {
             {user ? (
               <div className="flex items-center gap-2">
                 {isAdmin && (
-                  <Button variant="ghost" size="sm"  asChild>
-                    <Link href="/admin" className=" p-2 rounded hover:bg-[#3eff3e]">
-                      <Settings className="h-4 w-4 text-white" />
+                  // <Button  size="sm" className="bg-none hover:bg-[#3eff3e]" asChild>
+                    <Link href="/admin" className=" p-2 hover:bg-[#3eff3e] rounded">
+                      <Settings className="text-white  h-4 w-4 " />
                     </Link>
-                  </Button>
+                  // </Button>
                 )}
                 {/* <Button variant="ghost" size="sm" action={handleSignOut} > 
                   <LogOut className="h-4 w-4 cursor-pointer" color="white " />
@@ -110,11 +107,11 @@ const Header = async () => {
                 <LogoutButton/>
               </div>
             ) : (
-              <Button size="sm" asChild>
+              // <Button size="sm" asChild>
                 <Link href="/auth/login">
                   <LogIn className="h-4 w-4" color="white"/>
                 </Link>
-              </Button>
+              // </Button>
             )}
           </div>
         </nav>
