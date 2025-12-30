@@ -211,7 +211,7 @@ export default function Admin() { // Removed async here, data fetching moved to 
           </div>
 
           {isEditing ? (
-            <div className="bg-card border border-border rounded-xl p-6 text-white ">
+            <div className="bg-card border border-border rounded-xl p-6 ">
               <h2 className="text-xl font-bold mb-6">
                 {editingPost ? "Edit Post" : "Create New Post"}
               </h2>
@@ -361,7 +361,7 @@ export default function Admin() { // Removed async here, data fetching moved to 
                       <p className="text-sm text-[#7b899d]">
                         {post.category} • {post.read_time} •{" "}
                         {post.published ? (
-                          <span className="text-accent">Published</span>
+                          <span className="text-[#3dff3d]">Published</span>
                         ) : (
                           <span className="text-[#ff9933]">Draft</span>
                         )}
