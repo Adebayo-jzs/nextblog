@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft,Calendar,Clock } from "lucide-react";
+import Head from "next/head";
 import MarkdownIt from "markdown-it";
 const md = new MarkdownIt();
 const supabase = createClient();
@@ -99,6 +100,27 @@ const jsonLd = {
     //   <div className="mt-6">{post.content}</div>
     // </article>
     <>
+<Head>
+    <meta name="description" content={post.excerpt || post.title} />
+    <link rel="canonical" href={`https://blog.theebayo.name.ng/posts/${post.slug}`} />
+
+    {/* Open Graph */}
+    <meta property="og:title" content={post.title} />
+    <meta property="og:description" content={post.excerpt} />
+    <meta property="og:url" content={`https://blog.theebayo.name.ng/posts/${post.slug}`} />
+    <meta property="og:type" content="article" />
+    <meta property="og:published_time" content={post.created_at} />
+    <meta property="og:modified_time" content={post.updated_at} />
+    {/* Add og:image later if you have one, e.g. <meta property="og:image" content="https://.../cover.jpg" /> */}
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={post.title} />
+    <meta name="twitter:description" content={post.excerpt} />
+    {/* <meta name="twitter:image" content="..." /> if you add images */}
+
+    <meta name="robots" content="index, follow" /> {/* Optional but explicit */}
+  </Head>
     <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
