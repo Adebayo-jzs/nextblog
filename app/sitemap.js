@@ -21,12 +21,22 @@ export default async function sitemap() {
     url: `https://blog.theebayo.name.ng/posts/${post.slug}`,
     lastModified: new Date(post.updated_at),
     changeFrequency: "weekly",
-    priority: 0.8,
+    priority: 1,
   }));
 
   return [
     {
       url: "https://blog.theebayo.name.ng",
+      lastModified: new Date(),
+      priority: 1,
+    },
+{
+      url: "https://blog.theebayo.name.ng/posts",
+      lastModified: new Date(),
+      priority: 1,
+    },
+{
+      url: "https://blog.theebayo.name.ng/sponsor",
       lastModified: new Date(),
       priority: 1,
     },
