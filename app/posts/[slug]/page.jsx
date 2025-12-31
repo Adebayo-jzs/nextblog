@@ -9,7 +9,7 @@ const md = new MarkdownIt();
 const supabase = createClient();
  
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const { data: post } = await supabase
     .from("posts")
