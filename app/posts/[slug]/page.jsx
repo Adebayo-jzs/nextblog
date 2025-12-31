@@ -120,6 +120,9 @@ const jsonLd = {
     {/* <meta name="twitter:image" content="..." /> if you add images */}
 
     <meta name="robots" content="index, follow" /> {/* Optional but explicit */}
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1310135702830044"
+     crossorigin="anonymous"></script>
   </Head>
     <script
         type="application/ld+json"
