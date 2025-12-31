@@ -1,3 +1,4 @@
+export const revalidate = 86400;
 import { createClient } from "@/lib/client";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -6,42 +7,38 @@ import { ArrowLeft,Calendar,Clock } from "lucide-react";
 import MarkdownIt from "markdown-it";
 const md = new MarkdownIt();
 const supabase = createClient();
+ 
 export async function generateMetadata({ params }) {
-    const {slug} = await params;
-    const {data:post} = await supabase
+  const { slug } = params;
+
+  const { data: post } = await supabase
     .from("posts")
-    .select("*")
-    .eq("slug",slug)
+    .select("title, excerpt, slug, created_at, updated_at")
+    .eq("slug", slug)
     .eq("published", true)
     .single();
 
-    if (!post) !notFound();
-  
-const authorSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  'headline': post.title,
-  'author': {
-    '@type': 'Person',
-    'name': 'Adebayo Adedeji',
-    'url': 'https://theebayo.name.ng', // Very important!
-    'sameAs': [
-      'https://twitter.com/theebayo',
-      'https://github.com/Adebayo-jzs',
-      'https://linkedin.com/in/theebayo'
-    ]
+  if (!post) {
+    notFound();
   }
-};
+
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://blog.theebayo.name.ng/posts/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       url: `https://blog.theebayo.name.ng/posts/${post.slug}`,
       type: "article",
-      publishedTime: post.date,
-      authors: ['Adebayo Adedeji','Adedeji Adebayo', 'Theebayo'],
+      publishedTime: post.created_at,
+      modifiedTime: post.updated_at,
+      authors: ["Adebayo Adedeji"],
+    },
+    twitter: {
+      card: "summary_large_image",
     },
   };
 }
@@ -54,11 +51,12 @@ const authorSchema = {
   };
   
 export async function generateStaticParams() {
-  const { data: posts, error } = await supabase
+  const { data: posts } = await supabase
     .from("posts")
-    .select("slug");
+    .select("slug")
+    .eq("published", true);
 
-  if (error || !posts) return [];
+  if (!posts) return [];
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -77,12 +75,22 @@ export default async function BlogPostPage({ params }) {
   if (!post) notFound();
   const htmlContent = md.render(post.content)
 const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    'itemListElement': [
-      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://blog.theebayo.name.ng' },
-      { '@type': 'ListItem', 'position': 3, 'name': slug, 'item': `https://blog.theebayo.name.ng/posts/${slug}` }
-    ],
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.created_at,
+    dateModified: post.updated_at,
+    author: {
+      "@type": "Person",
+      name: "Adebayo Adedeji",
+      url: "https://theebayo.name.ng",
+      sameAs: [
+        "https://twitter.com/theebayo",
+        "https://github.com/Adebayo-jzs",
+        "https://linkedin.com/in/theebayo",
+      ],
+    },
   };
   return (
     // <article className="mx-auto max-w-3xl py-10">
