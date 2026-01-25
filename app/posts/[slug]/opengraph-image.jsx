@@ -2,31 +2,36 @@ import { createClient } from "@supabase/supabase-js";
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
+
 export const alt = "Theebayo Blog Post";
-export const size = { width: 1200, height: 630 };
+export const size = {
+    width: 1200,
+    height: 630,
+};
+
 export const contentType = "image/png";
 
 export default async function OgImage({ params }) {
-  const { slug } = params;
+    const { slug } = await params;
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+    // Initialize Supabase client
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
 
-  const { data: post } = await supabase
-    .from("posts")
-    .select("title")
-    .eq("slug", slug)
-    .single();
+    // Fetch post title
+    const { data: post } = await supabase
+        .from("posts")
+        .select("title")
+        .eq("slug", slug)
+        .single();
 
-  const title =
-    post?.title ||
-    slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    const title = post?.title || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-  return new ImageResponse(
-    (
-      <div style={{
+    return new ImageResponse(
+        (
+            <div style={{
         width: "100%",
         height: "100%",
         background: "#0e1216",
@@ -91,7 +96,9 @@ export default async function OgImage({ params }) {
           <span>Web Development</span>
         </div>
       </div>
-    ),
-    size
-  );
+        ),
+        {
+            ...size,
+        }
+    );
 }
