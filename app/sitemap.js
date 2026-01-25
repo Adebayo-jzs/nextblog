@@ -21,7 +21,7 @@ export default async function sitemap() {
     url: `https://blog.theebayo.name.ng/posts/${post.slug}`,
     lastModified: new Date(post.updated_at),
     changeFrequency: "weekly",
-    priority: 1,
+    priority: 0.7,
   }));
 
   return [
@@ -30,15 +30,15 @@ export default async function sitemap() {
       lastModified: new Date(),
       priority: 1,
     },
-{
+    {
       url: "https://blog.theebayo.name.ng/posts",
       lastModified: new Date(),
-      priority: 1,
+      priority: 0.8,
     },
-{
+    {
       url: "https://blog.theebayo.name.ng/sponsor",
       lastModified: new Date(),
-      priority: 1,
+      priority: 0.5,
     },
     ...postUrls,
   ];

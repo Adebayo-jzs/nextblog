@@ -5,6 +5,7 @@ import PostsGrid from "./components/PostsGrid";
 import Hero from "./components/Hero";
 
 export const metadata = {
+  metadataBase: new URL("https://blog.theebayo.name.ng"),
   description: 'Sharing insights on Next.js, Web Development, and Software Engineering.',
   alternates: {
     canonical: 'https://blog.theebayo.name.ng',
@@ -16,7 +17,7 @@ export const metadata = {
             "Sharing insights on Next.js, software development, and life updates.",
         type: "website",
         url: "https://blog.theebayo.name.ng",
-        siteName: "Theebayo",
+        siteName: "Theebayo Blog",
         images: [
             { url: "/og-image.jpg", width: 1200, height: 630, alt: "Theebayo Blog" }
         ],
@@ -30,6 +31,10 @@ export const metadata = {
         creator: "@theebayo",
         images: ["/og-image.jpg"],
     },
+    robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const jsonLd = {
